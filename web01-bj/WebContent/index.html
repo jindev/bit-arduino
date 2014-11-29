@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -32,22 +35,23 @@ nav {
 section {
 	float: left;
 	width: 80%;
-	height: 100px;
+	height: auto;
 	border: 1px solid black;
-	height: 100px;
+	text-align:center;
 	width: 80%;
 }
 
 article {
-	
 	width: 80%;
-	height: 100px;
+	height: auto;
+	margin:20px;
 	border: 1px solid black;
 }
-article.main{
-	position:relative;
-	left:-30px;
-	top:-30px;
+
+article.main {
+	position: relative;
+	left: -30px;
+	top: -30px;
 }
 
 footer {
@@ -55,22 +59,23 @@ footer {
 	height: 100px;
 	border: 1px solid black;
 }
-img{
-	position:absolute;
-	left:50px;
-	top:30px;
+
+img {
+	
 }
 </style>
 <body>
 	<div class="container">
 
 		<header>
-
+			<div>
+				<img src="http://icon.daumcdn.net/w/icon/1312/19/152729032.png" />
+			</div>
 			<div class="jumbotron">
 				<h1>아두이노 테스트</h1>
 				<p>...</p>
 				<p>
-					<a class="btn btn-primary btn-lg" href="#" role="button">바로 시작
+					<a class="btn btn-primary btn-lg" href="http://www.naver.com" role="button">바로 시작
 					</a>
 				</p>
 			</div>
@@ -95,22 +100,126 @@ img{
 				<p>7-Zip is a file archiver with a high compression ratio. The
 					main features of 7-Zip are: High compression ratio in new 7z format
 					with LZMA compression; Supported ...</p>
-				<div>
-					<img src="http://icon.daumcdn.net/w/icon/1312/19/152729032.png" />
-				</div>
+
 			</article>
 		</section>
 		<section>
 			<article>
-
-				<p>7-Zip is a file archiver with a high compression ratio. The
-					main features of 7-Zip are: High compression ratio in new 7z format
-					with LZMA compression; Supported ...</p>
+				<div id="testDiv"><button id="testBtn" class="btn btn-warning btn-lg" >테스트1</button></div>
+				
+						
+			</article>
+			<article>
+				<div id="testDiv2"><button id="testBtn2" class="btn btn-warning btn-lg">테스트2</button></div>
+				
+						
+			</article>
+			<article>
+				<div id="testDiv3"><button id="testBtn3" class="btn btn-warning btn-lg">테스트3</button></div>
+				
+						
+			</article>
+			
+		</section>
+		<section>
+			<article>
+				<div id="testTb">
+				
+				<table id="t1">
+				<tr>
+					<th>번호</th>
+					<th>작성자</th>
+					<th>제목</th>
+					<th>조회수</th>
+				</tr>	
+				</table>
+				</div>
+				<button id='getDataBtn'>요청 </button>
 			</article>
 		</section>
 		<footer>
 			<p>모든 권리 있어욥</p>
 		</footer>
+
+		<script>
+			"use strict";
+
+			var plus = function(a, b) {
+				return a + b;
+			};
+			function minus(a, b) {
+				return arguments[0] - arguments[1];
+			}
+			function multiple(a, b) {
+				return a * b * arguments[2] * arguments[3];
+			}
+			console.log(plus(20, 1, 3, 3));
+
+			var testObj = new Object();
+			var jsonObj = {
+					name : "제이선"
+			};
+			
+			var jsonString = '{' + '"hi":"안녕하세요"' + '}';
+			
+			var parsingJson = JSON.parse(jsonString);
+			
+			testObj.name = "dks"; 
+			testObj.print = function(){
+				console.log(jsonObj.name);
+			}
+			testObj.print();
+			
+			
+			console.log(parsingJson.hi);
+			
+			var b2 = document.getElementById("testBtn2");
+			b2.addEventListener("click", myclick);
+			
+			function myclick(event){
+				var a = 20;
+				a += 200;
+				alert(a);
+			}
+			
+		 	var b3 = document.getElementById("testBtn3");
+		 	b3.addEventListener("click",function(){
+		 		alert("awef3");
+		 	});
+		 	
+		 	document.getElementById("testBtn").addEventListener("click", function(){
+		 		alert('asdf');
+		 	}); 
+		 	document.getElementById("testBtn").onclick = function(event){
+		 		alert('asdfeeeeeeeeeeeeeeeeeeee');
+		 	}
+		 	
+		 	
+		 	var e1 = document.createElement('h1');
+		 	e1.innerHTML = "asdf";
+		 	var e2 = document.getElementById('testTb').appendChild(e1);
+			
+		 	document.getElementById('testBtn').onclick = function(){
+		 		
+		 	}
+		 	
+		 	document.getElementById('getDataBtn').onclick = function(){
+		 		var xhr = new XMLHttpRequest();
+		 		xhr.onreadystatechange = function(){
+		 			if(xhr.readyState == 4){
+		 				var seoulWeatherData = JSON.parse(xhr.responseText);
+		 				console.log(seoulWeatherData);
+		 			}
+		 			
+		 		}
+			 	xhr.open("GET","http://api.openweathermap.org/data/2.5/weather?q=seoul,kr",true);
+			 	xhr.send();
+			 	//var seoulWeatherData = JSON.parse(xhr.responseText);
+			 	//console.log(seoulWeatherData);
+		 	}
+		 	
+		 	
+		</script>
 	</div>
 </body>
 </html>
